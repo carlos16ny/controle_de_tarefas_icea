@@ -1,0 +1,16 @@
+materias.txt
+cód materia;         nome da materia      ; cargahoraria
+CSI030     ;PROGRAMACAO DE COMPUTADORES I ; 60
+CSI032     ;PROGRAMACAO DE COMPUTADORES II; 60
+
+
+cursos_tem_materia.txt
+cod materia;    cod do curso (1,2)   ;   tipo(Eletiva, Optativa, Obrigatória)
+CSI030     ;   1                     ; Obrigatória
+
+
+dependencias.txt
+cod materia  ; cod curso ; cod materia dependente 
+CSI032       ; 1         ; CSI030
+
+
