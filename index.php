@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<?php require_once 'admin/controller/loginController.php'
+ ?>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,20 +29,20 @@
   </div>
   <div class="login-box-body">
     <p class="login-box-msg">Login</p>
-    <form action="index2.html" method="post">
+    <form action="index.php" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="matricula">
+        <input type="text" name="matricula" class="form-control" placeholder="matricula">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Senha">
+        <input type="password" name="senha" class="form-control" placeholder="Senha">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
         </div>
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          <button type="submit" name="entrar" class="btn btn-primary btn-block btn-flat">Entrar</button>
         </div>
       </div>
     </form>
