@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<?php require_once 'admin/controller/loginController.php'
+<?php 
+
+require_once 'admin/controller/loginController.php';
+
  ?>
 <head>
   <meta charset="utf-8">

@@ -4,7 +4,7 @@ class Database{
 
     private $host = 'localhost';
 	private $user = 'root';
-	private $db_name = 'controle_tarefas';
+	private $db_name = 'controle_de_tarefas';
 	private $pass = '';
     public $conn;
 
