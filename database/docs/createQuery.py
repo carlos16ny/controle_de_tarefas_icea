@@ -6,11 +6,15 @@ query_materia = open("queryMateria.txt", "w")
 query_dependencia = open("queryDependecia.txt", "w")
 query_curso_materia = open("queryCursoMateria.txt", "w")
 
+materia = []
+
 for linha in file_materia:
     row = linha.split(";")
     if len(row) == 3:
-        escrita = "INSERT INTO 'classe' VALUES ('%s','%s','%2d');\n" % (row[0], row[1], int(row[2]))
-        query_materia.write(escrita)
+        if linha not in materia:
+                escrita = "INSERT INTO 'classe' VALUES ('%s','%s','%2d');\n" % (row[0], row[1], int(row[2]))
+                query_materia.write(escrita)
+                materia.append(linha)
 
 
 for linha in file_dependencia:
