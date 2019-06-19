@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Matárias do curso
+            Matérias do curso
             <small>X</small>
         </h1>
         <ol class="breadcrumb">

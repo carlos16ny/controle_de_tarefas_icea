@@ -67,6 +67,11 @@ body {
 @media (max-width: 767px) {
   .content-wrapper,
   .main-footer {
+    background: #fff;
+    padding: 15px;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+
     margin-left: 0;
   }
 }
