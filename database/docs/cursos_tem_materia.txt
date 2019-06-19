@@ -1,63 +1,63 @@
-CEA001;1;Obrigatoria;1
-CEA031;1;Obrigatoria;1
-CEA160;1;Obrigatoria;1
-CSI030;1;Obrigatoria;1
-CSI201;1;Obrigatoria;1
-CSI427;1;Obrigatoria;1
-EAD707;1;Obrigatoria;1
+CEA001;1;Obrigatória;1
+CEA031;1;Obrigatória;1
+CEA160;1;Obrigatória;1
+CSI030;1;Obrigatória;1
+CSI201;1;Obrigatória;1
+CSI427;1;Obrigatória;1
+EAD707;1;Obrigatória;1
 
-CEA003;1;Obrigatoria;2
-CEA301;1;Obrigatoria;2
-CEA307;1;Obrigatoria;2
-CSI032;1;Obrigatoria;2
-CSI443;1;Obrigatoria;2
+CEA003;1;Obrigatória;2
+CEA301;1;Obrigatória;2
+CEA307;1;Obrigatória;2
+CSI032;1;Obrigatória;2
+CSI443;1;Obrigatória;2
 
-CEA006;1;Obrigatoria;3
-CEA007;1;Obrigatoria;3
-CEA302;1;Obrigatoria;3
-CEA341;1;Obrigatoria;3
-CSI488;1;Obrigatoria;3
+CEA006;1;Obrigatória;3
+CEA007;1;Obrigatória;3
+CEA302;1;Obrigatória;3
+CEA341;1;Obrigatória;3
+CSI488;1;Obrigatória;3
 
-CEA013;1;Obrigatoria;4
-CEA552;1;Obrigatoria;4
-CEA562;1;Obrigatoria;4
-CSI429;1;Obrigatoria;4
-CSI466;1;Obrigatoria;4
+CEA013;1;Obrigatória;4
+CEA552;1;Obrigatória;4
+CEA562;1;Obrigatória;4
+CSI429;1;Obrigatória;4
+CSI466;1;Obrigatória;4
 
-CEA034;1;Obrigatoria;5
-CEA502;1;Obrigatoria;5
-CSI148;1;Obrigatoria;5 
-CSI203;1;Obrigatoria;5
-CSI485;1;Obrigatoria;5	
+CEA034;1;Obrigatória;5
+CEA502;1;Obrigatória;5
+CSI148;1;Obrigatória;5 
+CSI203;1;Obrigatória;5
+CSI485;1;Obrigatória;5	
 
-CEA561;1;Obrigatoria;6
-CEA582;1;Obrigatoria;6
-CSI440;1;Obrigatoria;6
-CSI509;1;Obrigatoria;6
-CSI546;1;Obrigatoria;6
+CEA561;1;Obrigatória;6
+CEA582;1;Obrigatória;6
+CSI440;1;Obrigatória;6
+CSI509;1;Obrigatória;6
+CSI546;1;Obrigatória;6
 
-CEA551;1;Obrigatoria;7
-CEA580;1;Obrigatoria;7
-CSI437;1;Obrigatoria;7
-CSI476;1;Obrigatoria;7
-CSI508;1;Obrigatoria;7
+CEA551;1;Obrigatória;7
+CEA580;1;Obrigatória;7
+CSI437;1;Obrigatória;7
+CSI476;1;Obrigatória;7
+CSI508;1;Obrigatória;7
 
-CSI419;1;Obrigatoria;8
-CSI450;1;Obrigatoria;8
-CSI457;1;Obrigatoria;8
-CSI548;1;Obrigatoria;8
-EAD344;1;Obrigatoria;8
+CSI419;1;Obrigatória;8
+CSI450;1;Obrigatória;8
+CSI457;1;Obrigatória;8
+CSI548;1;Obrigatória;8
+EAD344;1;Obrigatória;8
 
-CSI433;1;Obrigatoria;9
-CSI495;1;Obrigatoria;9
-CSI506;1;Obrigatoria;9
-CSI510;1;Obrigatoria;9
-EAD351;1;Obrigatoria;9
+CSI433;1;Obrigatória;9
+CSI495;1;Obrigatória;9
+CSI506;1;Obrigatória;9
+CSI510;1;Obrigatória;9
+EAD351;1;Obrigatória;9
 
-CEA592;1;Obrigatoria;10
-CSI491;1;Obrigatoria;10
-CSI496;1;Obrigatoria;10
-CSI693;1;Obrigatoria;10
+CEA592;1;Obrigatória;10
+CSI491;1;Obrigatória;10
+CSI496;1;Obrigatória;10
+CSI693;1;Obrigatória;10
 
 CEA026;1;Eletiva;0
 CEA147;1;Eletiva;0
@@ -120,51 +120,51 @@ ENP493;1;Eletiva;0
 LET966;1;Eletiva;0
 
 
-CEA036;2;Obrigatoria;1
-CEA423;2;Obrigatoria;1
-CSI030;2;Obrigatoria;1 
-CSI145;2;Obrigatoria;1
-CSI427;2;Obrigatoria;1
-CSI491;2;Obrigatoria;1
+CEA036;2;Obrigatória;1
+CEA423;2;Obrigatória;1
+CSI030;2;Obrigatória;1 
+CSI145;2;Obrigatória;1
+CSI427;2;Obrigatória;1
+CSI491;2;Obrigatória;1
 
-CSI032;2;Obrigatoria;2
-CSI443;2;Obrigatoria;2
-CSI460;2;Obrigatoria;2
-CSI488;2;Obrigatoria;2
-ENP144;2;Obrigatoria;2
+CSI032;2;Obrigatória;2
+CSI443;2;Obrigatória;2
+CSI460;2;Obrigatória;2
+CSI488;2;Obrigatória;2
+ENP144;2;Obrigatória;2
 
-CEA307;2;Obrigatoria;3
-CSI424;2;Obrigatoria;3
-CSI429;2;Obrigatoria;3
-CSI466;2;Obrigatoria;3 
-ENP473;2;Obrigatoria;3
+CEA307;2;Obrigatória;3
+CSI424;2;Obrigatória;3
+CSI429;2;Obrigatória;3
+CSI466;2;Obrigatória;3 
+ENP473;2;Obrigatória;3
 
-CSI437;2;Obrigatoria;4
-CSI440;2;Obrigatoria;4
-CSI485;2;Obrigatoria;4
-ENP150;2;Obrigatoria;4
-ENP153;2;Obrigatoria;4
+CSI437;2;Obrigatória;4
+CSI440;2;Obrigatória;4
+CSI485;2;Obrigatória;4
+ENP150;2;Obrigatória;4
+ENP153;2;Obrigatória;4
 
-CSI426;2;Obrigatoria;5
-CSI442;2;Obrigatoria;5
-CSI457;2;Obrigatoria;5
-CSI476;2;Obrigatoria;5
-CSI486;2;Obrigatoria;5
+CSI426;2;Obrigatória;5
+CSI442;2;Obrigatória;5
+CSI457;2;Obrigatória;5
+CSI476;2;Obrigatória;5
+CSI486;2;Obrigatória;5
 
-CSI419;2;Obrigatoria;6
-CSI433;2;Obrigatoria;6
-CSI450;2;Obrigatoria;6
-CSI477;2;Obrigatoria;6
-CSI735;2;Obrigatoria;6
+CSI419;2;Obrigatória;6
+CSI433;2;Obrigatória;6
+CSI450;2;Obrigatória;6
+CSI477;2;Obrigatória;6
+CSI735;2;Obrigatória;6
 
-CSI439;2;Obrigatoria;7
-CSI498;2;Obrigatoria;7
-ENP126;2;Obrigatoria;7
-ENP493;2;Obrigatoria;7
+CSI439;2;Obrigatória;7
+CSI498;2;Obrigatória;7
+ENP126;2;Obrigatória;7
+ENP493;2;Obrigatória;7
 
-CSI462;2;Obrigatoria;8
-CSI463;2;Obrigatoria;8
-CSI499;2;Obrigatoria;8 
+CSI462;2;Obrigatória;8
+CSI463;2;Obrigatória;8
+CSI499;2;Obrigatória;8 
 
 CSI001;2;Eletiva;0
 CSI001;2;Eletiva;0
