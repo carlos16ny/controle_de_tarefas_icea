@@ -1,5 +1,4 @@
 <?php include_once 'assets/templates/header.php'; ?>
-<?php require_once 'admin/controller/materiaController.php'; ?>
 <!-- Controller recebe as informações dos forms submetidos
 
 edit {
