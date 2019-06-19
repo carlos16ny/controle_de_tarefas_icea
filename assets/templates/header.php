@@ -135,11 +135,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="materia.php"><i class="fa fa-circle-o"></i> Discreta</a></li>
+            <li><a href="materia.php"><i class="fa fa-circle-o"></i> Matemática Discreta</a></li>
             <li><a href="materia.php"><i class="fa fa-circle-o"></i> Cálculo II</a></li>
             <li><a href="materia.php"><i class="fa fa-circle-o"></i> Fisica II</a></li>
             <li><a href="materia.php"><i class="fa fa-circle-o"></i> Banco de Dados I</a></li>
-            <li><a href="materia.php"><i class="fa fa-circle-o"></i> E. Sofware I</a></li>
+            <li><a href="materia.php"><i class="fa fa-circle-o"></i> Engenharia de Software I</a></li>
           </ul>
         </li>
         <li>

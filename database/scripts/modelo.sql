@@ -10,7 +10,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema controle_de_tarefas
 -- -----------------------------------------------------
-
+DROP SCHEMA `controle_de_tarefas`;
 -- -----------------------------------------------------
 -- Schema controle_de_tarefas
 -- -----------------------------------------------------
@@ -34,10 +34,9 @@ ENGINE = InnoDB;
 -- Table `controle_de_tarefas`.`class`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`class` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` VARCHAR(6) NOT NULL,
   `name` VARCHAR(70) NOT NULL,
   `workload` INT UNSIGNED NULL,
-  `classcol` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
@@ -48,12 +47,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`course_has_class` (
   `course_id` INT NOT NULL,
-  `class_id` INT NOT NULL,
+  `class_id` VARCHAR(6) NOT NULL,
   `type` ENUM('Obrigatória', 'Eletiva') NOT NULL,
   `semester` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`course_id`, `class_id`),
   INDEX `fk_course_has_class_class1_idx` (`class_id` ASC) ,
-  INDEX `fk_course_has_class_course_idx` (`course_id` ASC) ,
   CONSTRAINT `fk_course_has_class_course`
     FOREIGN KEY (`course_id`)
     REFERENCES `controle_de_tarefas`.`course` (`id`)
@@ -94,7 +92,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`student_has_class` (
   `student_registration` INT NOT NULL,
-  `class_id` INT NOT NULL,
+  `class_id` VARCHAR(6) NOT NULL,
   `skips` INT NOT NULL,
   `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`student_registration`, `class_id`),
@@ -118,7 +116,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`tasks` (
   `student__registration` INT NOT NULL,
-  `class_id` INT NOT NULL,
+  `class_id` VARCHAR(6) NOT NULL,
   `id` VARCHAR(45) NOT NULL,
   `type` VARCHAR(25) NOT NULL,
   `name` VARCHAR(25) NOT NULL,
@@ -142,11 +140,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`dependence` (
   `course_id` INT NOT NULL,
-  `class_id` INT NOT NULL,
-  `course_id1` INT NOT NULL,
-  `class_id1` INT NOT NULL,
-  PRIMARY KEY (`course_id`, `class_id`, `course_id1`, `class_id1`),
-  INDEX `fk_course_has_class_has_course_has_class_course_has_class2_idx` (`course_id1` ASC, `class_id1` ASC) ,
+  `class_id` VARCHAR(6) NOT NULL,
+  `course_id_dep` INT NOT NULL,
+  `class_id_dep` VARCHAR(6) NOT NULL,
+  PRIMARY KEY (`course_id`, `class_id`, `course_id_dep`, `class_id_dep`),
+  INDEX `fk_course_has_class_has_course_has_class_course_has_class2_idx` (`course_id_dep` ASC, `class_id_dep` ASC) ,
   INDEX `fk_course_has_class_has_course_has_class_course_has_class1_idx` (`course_id` ASC, `class_id` ASC) ,
   CONSTRAINT `fk_course_has_class_has_course_has_class_course_has_class1`
     FOREIGN KEY (`course_id` , `class_id`)
@@ -154,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`dependence` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_course_has_class_has_course_has_class_course_has_class2`
-    FOREIGN KEY (`course_id1` , `class_id1`)
+    FOREIGN KEY (`course_id_dep` , `class_id_dep`)
     REFERENCES `controle_de_tarefas`.`course_has_class` (`course_id` , `class_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

@@ -17,7 +17,7 @@ remove {
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Matária
+            Matéria
             <small>X</small>
         </h1>
         <ol class="breadcrumb">
