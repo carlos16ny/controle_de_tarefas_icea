@@ -28,7 +28,9 @@
  <script src="assets/dist/js/adminlte.min.js"></script>
 
  <script src="assets/bower_components/moment/moment.js"></script>
-<script src="assets/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+ <script src="assets/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+ <script src="assets/bower_components/fullcalendar/dist/locale/pt-br.js"></script>
+ 
 <script>
   $(function () {
 
@@ -66,16 +68,17 @@
         m    = date.getMonth(),
         y    = date.getFullYear()
     $('#calendar').fullCalendar({
+      firstDay : 1,
       header    : {
-        left  : 'prev,next today',
+        left  : 'Ant, Prox, Hoje',
         center: 'title',
         right : 'month,agendaWeek,agendaDay'
       },
       buttonText: {
-        today: 'today',
-        month: 'month',
-        week : 'week',
-        day  : 'day'
+        today: 'Hoje',
+        month: 'Mês',
+        week : 'Semana',
+        day  : 'Dias'
       },
       //Random default events
       events    : [

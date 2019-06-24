@@ -1,55 +1,41 @@
-<?php include_once 'assets/templates/header.php'; ?>
-<!-- Controller recebe as informações dos forms submetidos
-
-edit {
-    id, nome, valor, pontos, data_inicio, data_final, color
+<?php
+require_once 'admin/protection.php';
+require_once 'admin/controller/tarefaController.php';
+include_once 'assets/templates/header.php';
+if (isset($_GET['id'])) {
+    $mat = $materia->getMateriaById($_GET['id'])->fetch(PDO::FETCH_OBJ);
 }
-
-add {
-    nome, valor, pontos = null, data_inicio, data_final, color
-}
-
-remove {
-    id
-} -->
-
+?>
 
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Matéria
-            <small>X</small>
+            <?= $mat->name ?>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Materia X</li>
+            <li class="active"><?= $mat->name ?></li>
         </ol>
     </section>
     <section class="content">
         <div class="col-lg-12">
             <div class="box box-primary">
-                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <div class="box-header ">
                     <i class="ion ion-clipboard"></i>
-                    <h3 class="box-title">To Do List</h3>
+                    <h3 class="box-title">Tarefas</h3>
                 </div>
                 <div class="box-body">
-                    <ul class="todo-list ui-sortable">
-                        <li>
-                            <span class="text">Design a nice theme</span>
-                            <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                            <div class="tools">
-                                <i class="fa fa-edit" data-toggle="modal" data-target="#modal-editar"></i>
-                                <i class="fa fa-trash-o" data-toggle="modal" data-target="#modal-excluir"></i>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="text">Make the theme responsive</span>
-                            <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                            <div class="tools">
-                                <i class="fa fa-edit" data-toggle="modal" data-target="#modal-editar"></i>
-                                <i class="fa fa-trash-o" data-toggle="modal" data-target="#modal-excluir"></i>
-                            </div>
-                        </li>
+                    <ul class="todo-list">
+                        <?php foreach ($todasTarefas as $task) { ?>
+                            <li>
+                                <span class="text"><?= $task->name ?></span>
+                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                                <div class="tools">
+                                    <i class="fa fa-edit" data-toggle="modal" data-target="#modal-editar-<?= $task->id ?>"></i>
+                                    <i class="fa fa-trash-o" data-toggle="modal" data-target="#modal-excluir-<?= $task->id ?>"></i>
+                                </div>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 <!-- /.box-body -->
@@ -61,7 +47,7 @@ remove {
         <div class="col-lg-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Notas Materia X</h3>
+                    <h3 class="box-title">Notas</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -73,49 +59,37 @@ remove {
                                 <th>Progresso</th>
                                 <th style="width: 40px">Label</th>
                             </tr>
+                            <?php 
+                                $i = 0;
+                                foreach($todasTarefas as $t) {
+                                    $i++;
+                                    $perc = $t->nota / $t->total * 100;
+                                    $cor = $perc >= 60 ? 'success' : 'danger';
+                                    $cor2 = $perc >= 59 ? 'green' : 'red';
+                                    $total += $t->total;
+                                    $p += $t->nota;
+                            ?>
                             <tr>
-                                <td>1.</td>
-                                <td>Prova 1</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-red">55%</span></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Prova 2</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-yellow">70%</span></td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Prova 3</td>
+                                <td><?=$i?></td>
+                                <td><?=$t->name?></td>
                                 <td>
                                     <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                                        <div class="progress-bar progress-bar-<?=$cor?>" style="width: <?=$perc?>%"></div>
                                     </div>
                                 </td>
-                                <td><span class="badge bg-light-blue">30%</span></td>
+                                <td><span class="badge bg-<?=$cor2?>"><?=$perc?>%</span></td>
                             </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Seminário</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-green">90%</span></td>
-                            </tr>
+                            <?php
+                                }
+                            if($todasTarefas){
+                                $pp = number_format(($p / $total * 100), 2);
+                                $cor3 = $pp >= 60 ? 'green' : 'red';
+                            }
+                            ?>
                             <tr>
                                 <td colspan="2"><strong>Total<strong></td>
-                                <td colspan="2">57,9</td>
+                                <td colspan="1"><?=$p?> / <?=$total?></td>
+                                <td colspan="1"><span class="badge bg-<?=$cor3?>"><?=$pp?>%</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -132,9 +106,7 @@ remove {
 
     <div class="modal fade" id="modal-adicionar" style="display: none;">
         <div class="modal-dialog">
-
-            <form action="materia.php" method="post">
-
+            <form action="materia.php?id=<?= $_GET['id'] ?>" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -159,16 +131,16 @@ remove {
                             <h5>Data e Tempo de Inicio</h5>
                             <div class="row">
                                 <div class="col-lg-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-                                    <input name="data_inicio" type="date" class="form-control" placeholder="Data">
-                                </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                        <input name="data_inicio" type="date" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    <input name="tempo_inicio" type="time" class="form-control ">
-                                </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input name="tempo_inicio" type="time" class="form-control ">
+                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -176,23 +148,23 @@ remove {
                             <h5>Data e Tempo Final</h5>
                             <div class="row">
                                 <div class="col-lg-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-                                    <input name="data_final" type="date" class="form-control">
-                                </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                        <input name="data_final" type="date" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    <input id="tf1" name="tempo_final" type="text" class="form-control timepicker">
-                                </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input id="" name="tempo_final" type="time" class="form-control ">
+                                    </div>
                                 </div>
                             </div>
                             <br>
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
-                                <input name="color" class="jscolor form-control" value="#3f4fff">
+                                <input name="cor" class="jscolor form-control" value="#3f4fff">
                             </div>
                             <br>
 
@@ -208,94 +180,112 @@ remove {
     </div>
 
     <!-- Moda de Exclusão de tarefa -->
-
-    <div class="modal fade " id="modal-excluir" style="display: none;">
-        <div class="modal-dialog">
-            <form action="materia.php" method="post">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Exclusão de tarefa</h4>
+    <?php foreach ($todasTarefas as $task) { ?>
+        <div class="modal fade " id="modal-excluir-<?= $task->id ?>" style="display: none;">
+            <div class="modal-dialog">
+                <form action="materia.php?id=<?= $_GET['id'] ?>" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Exclusão de tarefa</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Você realmente deseja excluir a tarefa <?= $task->name ?> ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="id" value="<?= $task->id ?>">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                            <button name="excluir" type="submit" class="btn btn-primary">Sim</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>Você realmente deseja excluir a tarefa X?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="id" value="id">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        <button name="remover" type="submit" class="btn btn-primary">Sim</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 
     <!-- Modal de Edição de tarefa -->
+    <?php foreach ($todasTarefas as $task) { ?>
+        <div class="modal fade" id="modal-editar-<?= $task->id ?>" style="display: none;">
+            <div class="modal-dialog">
+                <form action="materia.php?id=<?= $_GET['id'] ?>" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Editar Tarefa</h4>
+                        </div>
+                        <div class="box-body">
 
-    <div class="modal fade" id="modal-editar" style="display: none;">
-        <div class="modal-dialog">
-            <form action="materia.php" method="post">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Editar Tarefa</h4>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa  fa-check-square-o"></i>  Nome</span>
+                                <input name="nome" type="text" class="form-control" value="<?= $task->name ?>">
+                            </div>
+                            <br>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-file-text-o"></i>  Valor</span>
+                                <input name="valor" type="text" class="form-control" value="<?= $task->total ?>">
+                            </div>
+                            <br>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-file-text-o"></i>  Nota</span>
+                                <input name="nota" type="text" class="form-control" value="<?= $task->nota ?>">
+                            </div>
+                            <br>
+
+                            <h5>Data e Tempo de Inicio</h5>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                        <input name="data_inicio" type="date" class="form-control" value="<?=(explode(" ",$task->data_ini)[0])?>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input name="tempo_inicio" type="time" class="form-control" value="<?=(explode(" ",$task->data_ini)[1])?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <h5>Data e Tempo Final</h5>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                        <input name="data_final" type="date" class="form-control" value="<?=(explode(" ",$task->data_fin)[0])?>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input id="" name="tempo_final" type="time" class="form-control" value="<?=(explode(" ",$task->data_fin)[1])?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
+                                <input name="color" class="jscolor form-control" value="<?=$task->color?>">
+                            </div>
+                            <br>
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="id" value="<?=$task->id?>">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                            <button name="editar" type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
                     </div>
-                    <div class="box-body">
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa  fa-check-square-o"></i></span>
-                            <input name="nome" type="text" class="form-control" placeholder="Tarefa X">
-                        </div>
-                        <br>
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-file-text-o"></i></span>
-                            <input name="valor" type="text" class="form-control" placeholder="23.00">
-                        </div>
-                        <br>
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-file-text-o"></i></span>
-                            <input name="nota" type="text" class="form-control" placeholder="Nota">
-                        </div>
-                        <br>
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-                            <input name="data_inicio" type="date" class="form-control" value="2019-06-10">
-                        </div>
-                        <br>
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-                            <input name="data_final" type="date" class="form-control" value="2019-06-10">
-                        </div>
-                        <br>
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
-                            <input name="color" class="jscolor form-control" value="#3f4fff">
-                        </div>
-                        <br>
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="id" value="id">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                        <button name="editar" type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 
     <?php include_once 'assets/templates/footer.php'; ?>
-    <script src="assets/dist/js/jscolor.js"></script>
-    <script>
-    $('#tf1').pickatime({
-        // 12 or 24 hour
-        twelvehour: true,
-        });
-    </script>
+    <script src="assets/dist/js/jscolor.js"></script>s

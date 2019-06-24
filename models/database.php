@@ -2,10 +2,10 @@
 
 class Database{
 
-    private $host = 'localhost';
+    private $host = '127.0.0.1';
 	private $user = 'root';
-	private $db_name = 'controle_tarefas';
-	private $pass = '';
+	private $db_name = 'controle_de_tarefas';
+	private $pass = '1234';
     public $conn;
 
 	public function connection(){

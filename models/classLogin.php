@@ -1,30 +1,45 @@
 <?php
-class Login {
+class Login
+{
+
     private $matricula;
     private $senha;
     public $conn;
 
-    public __construct(){
+    public function __construct()
+    {
         $database = new Database();
-            $dbSet = $database->dbSet();
-            $this->conn = $dbSet;
-         }
-    public function setMatricula($matricula){
+        $dbSet = $database->connection();
+        $this->conn = $dbSet;
+    }
+    public function setMatricula($matricula)
+    {
         $this->matricula = $matricula;
-
     }
-    public function setSenha($senha){
-        $this->senha = $senha;
+    public function setSenha($senha)
+    {
+        $this->senha = sha1($senha);
     }
-    public existsLogin(){
-        $query = "SELECT * FROM `student` WHERE `registration` = :matricula  AND `password` = :senha; ";
+    public function existsLogin()
+    {
+        $query = "SELECT s.name, s.registration, s.email, s.surname, c.name as curso FROM student s, course c WHERE EXISTS
+        (SELECT * FROM student WHERE registration = :matricula AND password = :senha);";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":matricula", $this->matricula);
-        $stmt->bindParam(":senha", sha1($this->senha));
+        $stmt->bindParam(":senha", $this->senha);
         $stmt->execute();
         return $stmt;
     }
+
+    public function insertAluno($dados){
+        $query = "INSERT INTO student (`registration`,`name`,`surname`,`email`,`password`,`course_id`) VALUES (:matricula, :nome, :sobrenome, :email, :senha, :curso);";
+        $stmt = $this->conn->prepare($query);
+        try{
+            $stmt->execute($dados);
+            return 1;
+        }catch(PDOException $e){
+            
+            return 0;
+        }
+    }
 }
-
-?>
-

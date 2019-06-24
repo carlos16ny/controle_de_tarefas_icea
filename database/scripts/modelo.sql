@@ -115,20 +115,19 @@ ENGINE = InnoDB;
 -- Table `controle_de_tarefas`.`tasks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`tasks` (
-  `student__registration` INT NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `student_registration` INT NOT NULL,
   `class_id` VARCHAR(6) NOT NULL,
-  `id` VARCHAR(45) NOT NULL,
-  `type` VARCHAR(25) NOT NULL,
-  `name` VARCHAR(25) NOT NULL,
+  `name` VARCHAR(70) NOT NULL,
   `total` FLOAT UNSIGNED NOT NULL,
   `nota` FLOAT UNSIGNED NULL,
   `data_ini` DATETIME NULL,
   `data_fin` DATETIME NULL,
   `color` CHAR(7) NULL,
-  PRIMARY KEY (`student__registration`, `class_id`, `id`),
+  PRIMARY KEY (`student_registration`, `class_id`, `id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
   CONSTRAINT `fk_tasks_student_has_class1`
-    FOREIGN KEY (`student__registration` , `class_id`)
+    FOREIGN KEY (`student_registration` , `class_id`)
     REFERENCES `controle_de_tarefas`.`student_has_class` (`student_registration` , `class_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -157,6 +156,32 @@ CREATE TABLE IF NOT EXISTS `controle_de_tarefas`.`dependence` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+DROP TRIGGER IF EXISTS `controle_de_tarefas`.`student_AFTER_INSERT`;
+
+DELIMITER $$
+USE `controle_de_tarefas`$$
+CREATE DEFINER=`root`@`%` TRIGGER `controle_de_tarefas`.`student_AFTER_INSERT` AFTER INSERT ON `student` FOR EACH ROW
+BEGIN
+
+declare materia_id varchar(6); 
+declare num_rows int default 0; 
+declare done int default false; 
+declare materias cursor for select class_id from course_has_class where `course_id` = NEW.course_id; 
+declare continue handler for not found set done = true; 
+open materias; 
+my_loop: loop
+    set done = false;
+    fetch materias into materia_id; 
+    if done then
+      leave my_loop;
+    end if;
+    insert into student_has_class values (NEW.registration, materia_id, 0, 0);
+end loop my_loop; 
+close materias; 
+END$$
+DELIMITER ;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

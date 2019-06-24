@@ -1,3 +1,4 @@
+<?php require_once 'admin/protection.php'; ?>
 <?php include_once 'assets/templates/header.php'; ?>
 <!-- fullCalendar -->
 <link rel="stylesheet" href="assets/bower_components/fullcalendar/dist/fullcalendar.min.css">
