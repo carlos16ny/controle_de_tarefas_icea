@@ -10,7 +10,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema controle_de_tarefas
 -- -----------------------------------------------------
-DROP SCHEMA `controle_de_tarefas`;
 -- -----------------------------------------------------
 -- Schema controle_de_tarefas
 -- -----------------------------------------------------
