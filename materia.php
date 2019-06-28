@@ -18,85 +18,89 @@ if (isset($_GET['id'])) {
         </ol>
     </section>
     <section class="content">
-        <div class="col-lg-12">
-            <div class="box box-primary">
-                <div class="box-header ">
-                    <i class="ion ion-clipboard"></i>
-                    <h3 class="box-title">Tarefas</h3>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-primary">
+                    <div class="box-header ">
+                        <i class="ion ion-clipboard"></i>
+                        <h3 class="box-title">Tarefas</h3>
+                    </div>
+                    <div class="box-body">
+                        <ul class="todo-list">
+                            <?php foreach ($todasTarefas as $task) { ?>
+                                <li>
+                                    <span class="text"><?= $task->name ?></span>
+                                    <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit" data-toggle="modal" data-target="#modal-editar-<?= $task->id ?>"></i>
+                                        <i class="fa fa-trash-o" data-toggle="modal" data-target="#modal-excluir-<?= $task->id ?>"></i>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix no-border">
+                        <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modal-adicionar"><i class="fa fa-plus"></i> Adicionar item</button>
+                    </div>
                 </div>
-                <div class="box-body">
-                    <ul class="todo-list">
-                        <?php foreach ($todasTarefas as $task) { ?>
-                            <li>
-                                <span class="text"><?= $task->name ?></span>
-                                <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                                <div class="tools">
-                                    <i class="fa fa-edit" data-toggle="modal" data-target="#modal-editar-<?= $task->id ?>"></i>
-                                    <i class="fa fa-trash-o" data-toggle="modal" data-target="#modal-excluir-<?= $task->id ?>"></i>
-                                </div>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer clearfix no-border">
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modal-adicionar"><i class="fa fa-plus"></i> Adicionar item</button>
-                </div>
+
             </div>
         </div>
-        <div class="col-lg-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Notas</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Tarefa</th>
-                                <th>Progresso</th>
-                                <th style="width: 40px">Label</th>
-                            </tr>
-                            <?php 
-                                $i = 0;
-                                foreach($todasTarefas as $t) {
-                                    $i++;
-                                    $perc = $t->nota / $t->total * 100;
-                                    $cor = $perc >= 60 ? 'success' : 'danger';
-                                    $cor2 = $perc >= 59 ? 'green' : 'red';
-                                    $total += $t->total;
-                                    $p += $t->nota;
-                            ?>
-                            <tr>
-                                <td><?=$i?></td>
-                                <td><?=$t->name?></td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-<?=$cor?>" style="width: <?=$perc?>%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-<?=$cor2?>"><?=$perc?>%</span></td>
-                            </tr>
-                            <?php
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Notas</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Tarefa</th>
+                                    <th>Progresso</th>
+                                    <th style="width: 40px">Label</th>
+                                </tr>
+                                <?php 
+                                    $i = 0;
+                                    $total = 0;
+                                    $p = 0;
+                                    $pp = 0;
+                                    foreach($todasTarefas as $t) {
+                                        $i++;
+                                        $perc = $t->nota / $t->total * 100;
+                                        $cor = $perc >= 60 ? 'success' : 'danger';
+                                        $cor2 = $perc >= 59 ? 'green' : 'red';
+                                        $total += $t->total;
+                                        $p += $t->nota;
+                                ?>
+                                <tr>
+                                    <td><?=$i?></td>
+                                    <td><?=$t->name?></td>
+                                    <td>
+                                        <div class="progress progress-xs progress-striped active">
+                                            <div class="progress-bar progress-bar-<?=$cor?>" style="width: <?=$perc?>%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-<?=$cor2?>"><?=$perc?>%</span></td>
+                                </tr>
+                                <?php
+                                    }
+                                if($todasTarefas){
+                                    $pp = number_format(($p / $total * 100), 2);
+                                    $cor3 = $pp >= 60 ? 'green' : 'red';
                                 }
-                            if($todasTarefas){
-                                $pp = number_format(($p / $total * 100), 2);
-                                $cor3 = $pp >= 60 ? 'green' : 'red';
-                            }
-                            ?>
-                            <tr>
-                                <td colspan="2"><strong>Total<strong></td>
-                                <td colspan="1"><?=$p?> / <?=$total?></td>
-                                <td colspan="1"><span class="badge bg-<?=$cor3?>"><?=$pp?>%</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer clearfix">
-
+                                ?>
+                                <tr>
+                                    <td colspan="2"><strong>Total<strong></td>
+                                    <td colspan="1"><?=$p?> / <?=$total?></td>
+                                    <td colspan="1"><span class="badge bg-<?=$cor3?>"><?=$pp?>%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

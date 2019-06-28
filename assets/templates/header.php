@@ -107,9 +107,9 @@
         <li>
           <a href="grade.php">
             <i class="fa fa-calendar"></i> <span>Grade Curricular</span>
-            <span class="pull-right-container">
+            <!-- <span class="pull-right-container">
               <small class="label pull-right bg-yellow">49</small>
-            </span>
+            </span> -->
           </a>
         </li>
       </ul>

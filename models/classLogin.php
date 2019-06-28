@@ -22,8 +22,7 @@ class Login
     }
     public function existsLogin()
     {
-        $query = "SELECT s.name, s.registration, s.email, s.surname, c.name as curso FROM student s, course c WHERE EXISTS
-        (SELECT * FROM student WHERE registration = :matricula AND password = :senha);";
+        $query = "SELECT s.name, s.registration, s.email, s.surname, c.name as curso FROM student s, course c WHERE registration = :matricula AND password = :senha AND c.id = s.course_id ;";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":matricula", $this->matricula);
         $stmt->bindParam(":senha", $this->senha);

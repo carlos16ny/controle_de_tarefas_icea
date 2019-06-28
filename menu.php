@@ -18,14 +18,14 @@
     </ol>
   </section>
   <section class="content">
-    <section class="col-lg-12">
-
-      <div class="box box-warning">
-        <div class="box-body" style="display: block;">
-          <div id="calendar"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-warning">
+          <div class="box-body" style="display: block;">
+            <div id="calendar"></div>
+          </div>
         </div>
       </div>
-
-    </section>
+    </div>
   </section>
   <?php include_once 'assets/templates/footer.php'; ?>

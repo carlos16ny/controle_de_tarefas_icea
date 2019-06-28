@@ -81,7 +81,7 @@ class Materia
     }
 
     public function getMateriasPorAluno($matricula){
-        $query = "  SELECT  cc.type, s.student_registration, c.id, c.name, s.status, cc.semester
+        $query = "  SELECT cc.type, s.student_registration, c.id, c.name, s.status, cc.semester
                     FROM student_has_class s, class c, course_has_class cc
                     WHERE s.student_registration = :matricula AND s.class_id = c.id AND cc.class_id = c.id AND cc.course_id = (SELECT course_id FROM student WHERE registration = :matricula) ORDER BY cc.semester ASC;
                 ";
