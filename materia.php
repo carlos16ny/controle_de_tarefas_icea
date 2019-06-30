@@ -70,7 +70,7 @@ if (isset($_GET['id'])) {
                                     $pp = 0;
                                     foreach($todasTarefas as $t) {
                                         $i++;
-                                        $perc = $t->nota / $t->total * 100;
+                                        $perc = number_format($t->nota / $t->total * 100, 2);
                                         $cor = $perc >= 60 ? 'success' : 'danger';
                                         $cor2 = $perc >= 59 ? 'green' : 'red';
                                         $total += $t->total;

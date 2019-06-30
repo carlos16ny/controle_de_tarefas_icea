@@ -219,6 +219,28 @@
           </div>
         </div>
     <?php } ?>
+    <div class="modal fade" id="concluir" style="display: none;">
+        <div class="modal-dialog">
+            <form action="grade.php" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Deseja concluir o semestre composto pelas matérias:</h4>
+                    </div>
+                    <div class="modal-body">
+                    <?php foreach($cursando as $c) { ?>
+                        <p><?=$c['id']?> - <?=$c['name']?></p>
+                    <?php } ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                        <button type="submit" name="concluirsemestre" class="btn btn-primary">Sim</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
 
     <?php include_once 'assets/templates/footer.php'; ?>

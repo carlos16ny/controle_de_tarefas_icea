@@ -100,6 +100,43 @@ class Materia
             return 0;
             echo $e->getMessage();
         }
+    }
 
+    public function concluirMateria($dados){
+        $query = "UPDATE student_has_class s SET s.status = 2 WHERE s.student_registration = :matricula AND s.class_id = :id_materia";
+        $stmt = $this->conn->prepare($query);
+        try{
+            $stmt->execute($dados);
+            return 1;
+        }catch(PDOException $e){
+            return 0;
+            echo $e->getMessage();
+        }
+    }
+
+    public function reprovarMateria($dados){
+        $query = "UPDATE student_has_class s SET s.status = 3 WHERE s.student_registration = :matricula AND s.class_id = :id_materia";
+        $stmt = $this->conn->prepare($query);
+        try{
+            $stmt->execute($dados);
+            return 1;
+        }catch(PDOException $e){
+            return 0;
+            echo $e->getMessage();
+        }
+    }
+
+    public function restartMateria($dados){
+
+    }
+
+    public function getResultMateria($dados){
+        $query = "  SELECT SUM(t.nota) / SUM(t.total) * 100 as resultado
+                    FROM tasks t
+                    WHERE t.student_registration = :matricula AND t.class_id = :materia
+                ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($dados);
+        return $stmt;
     }
 }
