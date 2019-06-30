@@ -14,6 +14,20 @@
 
 
     <section class="content">
+
+        <div class="row" style="margin-bottom: 3rem; margin-top: 2rem;">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                    </div>
+                    <div class="box-body">
+
+                        <button class="btn btn-success" data-target="#concluir" data-toggle="modal">Concluir Semestre</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
@@ -29,7 +43,7 @@
                     <div class="box-body" style="">
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-hover">
+                                <table class="table-grade table table-hover">
                                     <tbody>
                                         <tr>
                                             <th>ID</th>
@@ -41,15 +55,31 @@
                                         <?php 
                                             $a = "1";
                                             foreach($obrigatorias as $ob) {
+
                                                 if($ob['status'] == '1'){
+                                                    $btnicon = 'stop';
+                                                    $btntext = 'Concluir';
                                                     $labelcolor = 'warning';
                                                     $label = 'Cursando';
+                                                    $link = 'data-toggle="modal" data-target="#materia-'. strtoupper($ob['id']) . '"';
                                                 }else if($ob['status'] == '2'){
+                                                    $btnicon = 'eye';
+                                                    $btntext = 'Ver';
                                                     $labelcolor = 'success';
                                                     $label = 'Aprovado';
+                                                    $link = 'href="materia.php?id=' . $ob['id'] . '"';
+                                                }elseif($ob['status'] == '3'){
+                                                    $btnicon = 'repeat';
+                                                    $btntext = 'Recomeçar';
+                                                    $labelcolor = 'danger';
+                                                    $label = 'Reprovado';
+                                                    $link = 'data-toggle="modal" data-target="#materia-'. strtoupper($ob['id']) . '"';
                                                 }else{
+                                                    $btnicon = 'play';
+                                                    $btntext = 'Cursar';
                                                     $labelcolor = 'primary';
                                                     $label = 'Pendente';
+                                                    $link = 'data-toggle="modal" data-target="#materia-'. strtoupper($ob['id']) . '"';
                                                 }
 
                                             if($a != $ob['semester']){
@@ -62,11 +92,11 @@
                                                 <td><?=$ob['name']?></td>
                                                 <td><?=$ob['semester']?></td>
                                                 <td><span class="label label-<?=$labelcolor?>"><?=$label?></span></td>
-                                                <th>
-                                                    <a class="btn btn-app">
-                                                        <i class="fa fa-play"></i> Play
+                                                <td>
+                                                    <a class="btn btn-app" <?=$link?> >
+                                                        <i class="fa fa-<?=$btnicon?>"></i> <?=$btntext?>
                                                     </a>
-                                                </th>
+                                                </td>
                                             </tr>
                                         <?php
                                             }
@@ -138,7 +168,59 @@
                 </div>
             </div>
         </div>
+    
+    
     </section>
+
+    <?php foreach($cursando as $c) { ?>
+        <div class="modal fade" id="materia-<?=$c['id']?>" style="display: none;">
+          <div class="modal-dialog">
+            <form action="grade.php" method="post">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Você deseja concluir a matéria <?=$c['id']?> ?</h4>
+                </div>
+                <div class="modal-body">
+                    <p><?=$c['name']?></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id_materia" value="<?=$c['id']?>">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                    <button type="submit" name="concluir" class="btn btn-primary">Sim</button>
+                </div>
+                </div>
+            </form>
+          </div>
+        </div>
+    <?php } ?>
+
+    <?php foreach($possoCursar as $c) { ?>
+        <div class="modal fade" id="materia-<?=$c['id']?>" style="display: none;">
+          <div class="modal-dialog">
+            <form action="grade.php" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Deseja iniciar a matéria <?=$c['id']?> ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><?=$c['name']?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id_materia" value="<?=$c['id']?>">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                        <button type="submit" name="ativar" class="btn btn-primary">Sim</button>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+    <?php } ?>
+
 
     <?php include_once 'assets/templates/footer.php'; ?>
     <script src="assets/dist/js/jscolor.js"></script>
+

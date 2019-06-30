@@ -54,5 +54,14 @@ class Tarefa{
         return $stmt;
     }
 
+    public function getAllTasksByMatricula($dados){
+        $query = "SELECT * FROM tasks t, student_has_class s WHERE t.student_registration = :matricula AND t.class_id = s.class_id AND s.status = 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($dados);
+        return $stmt;
+    }
+
+    
+
 }
 ?>

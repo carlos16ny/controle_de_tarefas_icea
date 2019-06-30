@@ -89,4 +89,17 @@ class Materia
         $stmt->execute($matricula);
         return $stmt;
     }
+
+    public function activateMateria($dados){
+        $query = "UPDATE student_has_class s SET s.status = 1 WHERE s.student_registration = :matricula AND s.class_id = :id_materia";
+        $stmt = $this->conn->prepare($query);
+        try{
+            $stmt->execute($dados);
+            return 1;
+        }catch(PDOException $e){
+            return 0;
+            echo $e->getMessage();
+        }
+
+    }
 }
