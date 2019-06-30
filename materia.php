@@ -8,12 +8,34 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="content-wrapper">
+
+<?php 
+if(isset($result)){
+    if ($result) {
+        echo '
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>Tudo certo por aqui =)</h4>
+                    <p>modificação realizada com sucesso</p>
+                </div>
+                ';
+    } else {
+        echo '
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4>Ops! Ocorreu algum erro!</h4>
+                <p>Não foi possível realizar as modificações</p>
+            </div>
+            ';
+    }
+}
+?>
     <section class="content-header">
         <h1>
             <?= $mat->name ?>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="menu.php"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active"><?= $mat->name ?></li>
         </ol>
     </section>

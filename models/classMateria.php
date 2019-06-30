@@ -127,7 +127,15 @@ class Materia
     }
 
     public function restartMateria($dados){
-
+        $query = "DELETE FROM tasks t WHERE t.student_registration = :matricula AND t.class_id = :id_materia";
+        $stmt = $this->conn->prepare($query);
+        try{
+            $stmt->execute($dados);
+            return 1;
+        }catch(PDOException $e){
+            return 0;
+            echo $e->getMessage();
+        }
     }
 
     public function getResultMateria($dados){

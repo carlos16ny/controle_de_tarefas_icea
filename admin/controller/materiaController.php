@@ -22,6 +22,13 @@
     }elseif(isset($_POST['concluirsemestre'])){
         $materiasParaConcluir = $materia->getMateriasCursando($_SESSION['aluno_matricula'])->fetchAll(PDO::FETCH_OBJ);
         $result = ComputaSemestre($materiasParaConcluir);
+    }elseif(isset($_POST['restart'])){
+        $dados = array(
+            ":id_materia" => $_POST['id_materia'],
+            ":matricula" => $_SESSION['aluno_matricula']
+        );
+        $result = $materia->restartMateria($dados);
+        $result = $materia->activateMateria($dados);
     }
 
 
@@ -75,7 +82,5 @@
             array_push($possoCursar, $e);
         }
     }
-
-    
     
 ?>

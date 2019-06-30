@@ -1,7 +1,31 @@
 <?php require_once 'admin/protection.php'; ?>
-<?php include_once 'assets/templates/header.php'; ?>
 <?php include_once 'admin/controller/materiaController.php' ?>
+<?php include_once 'assets/templates/header.php'; ?>
 <div class="content-wrapper">
+
+<?php
+
+if(isset($result)){
+    if($result){
+        echo '
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>Tudo certo por aqui!</h4>
+            <p>Modificações realizadas com sucesso.</p>
+        </div>
+        ';
+    }else{
+        echo '
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>Ops! Ocorreu algum erro!</h4>
+            <p>Tente novamente</p>
+        </div>
+        ';
+    }
+}
+
+?>
     <section class="content-header">
         <h1>
             Matérias de <?= $_SESSION['aluno_curso'] ?>
@@ -189,6 +213,30 @@
                     <input type="hidden" name="id_materia" value="<?=$c['id']?>">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
                     <button type="submit" name="concluir" class="btn btn-primary">Sim</button>
+                </div>
+                </div>
+            </form>
+          </div>
+        </div>
+    <?php } ?>
+
+    <?php foreach($reprovadas as $c) { ?>
+        <div class="modal fade" id="materia-<?=$c['id']?>" style="display: none;">
+          <div class="modal-dialog">
+            <form action="grade.php" method="post">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Você deseja reiniciar a matéria <?=$c['id']?> ?</h4>
+                </div>
+                <div class="modal-body">
+                    <p><?=$c['name']?></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id_materia" value="<?=$c['id']?>">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                    <button type="submit" name="restart" class="btn btn-primary">Sim</button>
                 </div>
                 </div>
             </form>
