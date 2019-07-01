@@ -182,6 +182,39 @@ AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = latin1;
 
 
+DELIMITER $$
+USE `controle_de_tarefas`$$
+DROP TRIGGER IF EXISTS `controle_de_tarefas`.`student_AFTER_INSERT` $$
+USE `controle_de_tarefas`$$
+CREATE
+DEFINER=`root`@`%`
+TRIGGER `controle_de_tarefas`.`student_AFTER_INSERT`
+AFTER INSERT ON `controle_de_tarefas`.`student`
+FOR EACH ROW
+BEGIN
+
+declare materia_id varchar(6); 
+declare num_rows int default 0; 
+declare done int default false; 
+declare materias cursor for select class_id from course_has_class where `course_id` = NEW.course_id; 
+declare continue handler for not found set done = true; 
+open materias; 
+
+my_loop: loop
+    set done = false;
+    fetch materias into materia_id; 
+    if done then
+      leave my_loop;
+    end if;
+    insert into student_has_class values (NEW.registration, materia_id, 0, 0);
+end loop my_loop; 
+close materias; 
+END$$
+
+
+DELIMITER ;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
