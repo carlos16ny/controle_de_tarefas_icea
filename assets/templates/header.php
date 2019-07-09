@@ -86,7 +86,6 @@
           <a href="menu.php">
             <i class="fa fa-calendar"></i> <span>MEU CALENDÁRIO</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-red">5</small>
             </span>
           </a>
         </li>

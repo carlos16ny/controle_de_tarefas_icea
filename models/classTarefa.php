@@ -17,7 +17,6 @@ class Tarefa{
             $stmt->execute($dados);
             return 1;
         }catch(PDOException $e){
-            echo $e->getMessage();
             return 0;
         }
     }
@@ -30,7 +29,6 @@ class Tarefa{
             $stmt->execute();
             return 1;
         }catch(PDOException $e){
-            echo $e->getMessage();
             return 0;
         }
     }
@@ -42,7 +40,6 @@ class Tarefa{
             $stmt->execute($dados);
             return 1;
         }catch(PDOException $e){
-            echo $e->getMessage();
             return 0;
         }
     }

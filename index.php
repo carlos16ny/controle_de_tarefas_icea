@@ -3,6 +3,7 @@
   if(isset($_SESSION['aluno_matricula'])){
     header("Location: menu.php");
   }
+  $erro = $_GET['erro'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
+<?php if(isset($erro) &&  $erro = 1) {?> 
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4>Erro 101</h4>
+    <p>O login deve ser realizado</p>
+</div>
+<?php } ?>
 <div class="login-box">
   <div class="login-logo">
     <a href="index.php"><b>Minha </b>AGENDA</a>

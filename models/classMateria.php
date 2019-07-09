@@ -98,7 +98,6 @@ class Materia
             return 1;
         }catch(PDOException $e){
             return 0;
-            echo $e->getMessage();
         }
     }
 
@@ -110,7 +109,6 @@ class Materia
             return 1;
         }catch(PDOException $e){
             return 0;
-            echo $e->getMessage();
         }
     }
 
@@ -122,7 +120,6 @@ class Materia
             return 1;
         }catch(PDOException $e){
             return 0;
-            echo $e->getMessage();
         }
     }
 
@@ -134,7 +131,6 @@ class Materia
             return 1;
         }catch(PDOException $e){
             return 0;
-            echo $e->getMessage();
         }
     }
 

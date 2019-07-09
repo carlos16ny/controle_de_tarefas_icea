@@ -68,7 +68,7 @@ function loadCallendar() {
     $('#calendar').fullCalendar({
       firstDay : 1,
       header    : {
-        left  : 'Ant, Prox, Hoje',
+        left  : 'prev,next,today',
         center: 'title',
         right : 'month,agendaWeek,agendaDay'
       },

@@ -181,7 +181,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = latin1;
 
-
 DELIMITER $$
 USE `controle_de_tarefas`$$
 DROP TRIGGER IF EXISTS `controle_de_tarefas`.`student_AFTER_INSERT` $$

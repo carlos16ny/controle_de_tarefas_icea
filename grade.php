@@ -70,9 +70,9 @@ if(isset($result)){
                                 <table class="table-grade table table-hover">
                                     <tbody>
                                         <tr>
-                                            <th>ID</th>
+                                            <th class="hidden-xs">ID</th>
                                             <th>Nome</th>
-                                            <th>Periodo</th>
+                                            <th class="hidden-xs">Período</th>
                                             <th>Status</th>
                                             <th>Ação</th>
                                         </tr>
@@ -112,9 +112,9 @@ if(isset($result)){
                                             $a = $ob['semester'];
                                         ?>
                                             <tr>
-                                                <td><?=$ob['id']?></td>
+                                                <td class="hidden-xs"><?=$ob['id']?></td>
                                                 <td><?=$ob['name']?></td>
-                                                <td><?=$ob['semester']?></td>
+                                                <td class="hidden-xs"><?=$ob['semester']?></td>
                                                 <td><span class="label label-<?=$labelcolor?>"><?=$label?></span></td>
                                                 <td>
                                                     <a class="btn btn-app" <?=$link?> >
@@ -153,36 +153,52 @@ if(isset($result)){
                                         <tr>
                                             <th>ID</th>
                                             <th>Nome</th>
-                                            <th>Periodo</th>
+                                            <th>Período</th>
                                             <th>Status</th>
                                             <th>Ação</th>
                                         </tr>
                                         <?php 
                                             foreach($eletivas as $ob) {
+
                                                 if($ob['status'] == '1'){
+                                                    $btnicon = 'stop';
+                                                    $btntext = 'Concluir';
                                                     $labelcolor = 'warning';
                                                     $label = 'Cursando';
+                                                    $link = 'data-toggle="modal" data-target="#materia-'. strtoupper($ob['id']) . '"';
                                                 }else if($ob['status'] == '2'){
+                                                    $btnicon = 'eye';
+                                                    $btntext = 'Ver';
                                                     $labelcolor = 'success';
                                                     $label = 'Aprovado';
+                                                    $link = 'href="materia.php?id=' . $ob['id'] . '"';
+                                                }elseif($ob['status'] == '3'){
+                                                    $btnicon = 'repeat';
+                                                    $btntext = 'Recomeçar';
+                                                    $labelcolor = 'danger';
+                                                    $label = 'Reprovado';
+                                                    $link = 'data-toggle="modal" data-target="#materia-'. strtoupper($ob['id']) . '"';
                                                 }else{
+                                                    $btnicon = 'play';
+                                                    $btntext = 'Cursar';
                                                     $labelcolor = 'primary';
                                                     $label = 'Pendente';
+                                                    $link = 'data-toggle="modal" data-target="#materia-'. strtoupper($ob['id']) . '"';
                                                 }
                                         ?>
                                             <tr>
-                                                <td><?=$ob['id']?></td>
+                                                <td class="hidden-xs"><?=$ob['id']?></td>
                                                 <td><?=$ob['name']?></td>
-                                                <td>-</td>
+                                                <td class="hidden-xs"><?=$ob['semester']?></td>
                                                 <td><span class="label label-<?=$labelcolor?>"><?=$label?></span></td>
                                                 <td>
-                                                    <a class="btn btn-app">
-                                                        <i class="fa fa-play"></i> Play
+                                                    <a class="btn btn-app" <?=$link?> >
+                                                        <i class="fa fa-<?=$btnicon?>"></i> <?=$btntext?>
                                                     </a>
                                                 </td>
                                             </tr>
                                         <?php
-                                        }
+                                            }
                                         ?>
                                     </tbody>
                                 </table>
