@@ -26,14 +26,6 @@ INSERT INTO `dependence` VALUES (1,'CEA003',1,'CEA001'),(1,'CEA013',1,'CEA001'),
 /*!40000 ALTER TABLE `dependence` ENABLE KEYS */;
 UNLOCK TABLES;
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1728226,'Carlos Henrique','Abreu','carloshpa.mg4@me.com','40bd001563085fc35165329ea1ff5c5ecbdbbeef','2019-06-20 19:14:50',2),
-                             (1628365,'Milena','Ester','miih.esther@gmail.com','40bd001563085fc35165329ea1ff5c5ecbdbbeef','2019-06-20 19:14:50',2),
-                             (1815961,'Anna','Theresa','annatheresa95@gmail.com','40bd001563085fc35165329ea1ff5c5ecbdbbeef','2019-06-20 19:14:50',2),
-                             (1618367,'Gisela','Lourenço','gisela.l.j@gmail.com','40bd001563085fc35165329ea1ff5c5ecbdbbeef','2019-06-20 19:14:50',2);
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 
